@@ -19,8 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         
-        // MARK: UPDATE THE FOLLOWING LINE FOR YOUR InitialViewController
-        window.rootViewController = ViewController()
+        let navigationController = UINavigationController(rootViewController: WelcomeAppPageViewController())
+        window.rootViewController = navigationController
         self.window = window
         self.window?.makeKeyAndVisible()
     }
