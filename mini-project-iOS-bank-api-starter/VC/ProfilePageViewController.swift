@@ -12,7 +12,7 @@ class ProfilePageViewController: UIViewController {
     
     // MARK: - Properties
     var balance: AmountChange?
-    
+    var token: String?
     lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .purple
@@ -23,9 +23,9 @@ class ProfilePageViewController: UIViewController {
                                 width: 120, height: 120)
         profileImageView.layer.cornerRadius = 120 / 2
         
-        view.addSubview(messageButton)
-        messageButton.anchor(top: view.topAnchor, left: view.leftAnchor,
-                             paddingTop: 64, paddingLeft: 28, width: 24, height: 20)
+       // view.addSubview(messageButton)
+     //   messageButton.anchor(top: view.topAnchor, left: view.leftAnchor,
+               //              paddingTop: 64, paddingLeft: 28, width: 24, height: 20)
         //
         //            view.addSubview(followButton)
         //            followButton.anchor(top: view.topAnchor, right: view.rightAnchor,
@@ -55,13 +55,13 @@ class ProfilePageViewController: UIViewController {
         iv.layer.borderColor = UIColor.white.cgColor
         return iv
     }()
-    
-    let messageButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(imageLiteralResourceName:"mail_message").withRenderingMode(.alwaysOriginal), for: .normal)
-        button.addTarget(ProfilePageViewController.self, action: #selector(handleMessageUser), for: .touchUpInside)
-        return button
-    }()
+//
+//    let messageButton: UIButton = {
+//        let button = UIButton(type: .system)
+//        button.setImage(UIImage(imageLiteralResourceName:"mail_message").withRenderingMode(.alwaysOriginal), for: .normal)
+//        button.addTarget(ProfilePageViewController.self, action: #selector(handleMessageUser), for: .touchUpInside)
+//        return button
+//    }()
     
     let nameLabel: UILabel = {
         let label = UILabel()

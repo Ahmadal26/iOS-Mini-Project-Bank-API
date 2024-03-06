@@ -21,19 +21,34 @@ class SignInViewController: FormViewController {
                 row.title = "Username"
                 row.placeholder = "Enter username"
                 row.tag = SignupViewController.TagUser.username.rawValue 
+                row.add(rule: RuleRequired())
+                row.validationOptions = .validatesOnChange
+                row.cellUpdate { cell, row in
+                    if !row.isValid {
+                        cell.titleLabel?.textColor = .red
+                    }
+                }
             }
             <<< PasswordRow() { row in
                 row.title = "Password"
                 row.placeholder = "Enter password"
                 row.tag = SignupViewController.TagUser.password.rawValue
+                row.add(rule: RuleRequired())
+                row.validationOptions = .validatesOnChange
+                row.cellUpdate { cell, row in
+                    if !row.isValid {
+                        cell.titleLabel?.textColor = .red
+                    }
+                }
             }
             +++ Section()
             <<< ButtonRow() { row in
                 row.title = "Sign In"
-                row.onCellSelection { [weak self] (_, _) in
-                    self?.signInAction()
+                row.onCellSelection {cell,  row in
+                    self.signInAction()
                 }
             }
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(signInAction))
     }
 
     @objc func signInAction() {
@@ -57,11 +72,14 @@ class SignInViewController: FormViewController {
                 case .success(let tokenResponse):
                     print("Sign In successful. Token: \(tokenResponse.token)")
                     
-                    //Nav
+                    let ProfileVC = ProfilePageViewController()
+                    ProfileVC.token = tokenResponse.token
+                    self.navigationController?.pushViewController(ProfileVC, animated: true)
+             
                     
                 case .failure(let error):
                     print("Sign In failed. Error: \(error.localizedDescription)")
-                    self.presentAlertWithTitle(title: "Error", message: "Sign In failed. Please check your credentials.")
+                    
                 }
             }
         }

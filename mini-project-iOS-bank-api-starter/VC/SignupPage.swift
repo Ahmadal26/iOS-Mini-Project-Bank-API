@@ -10,6 +10,7 @@ import Eureka
 
 class SignupViewController: FormViewController {
     
+    
     enum TagUser: String {
         case username = "username"
         case email = "email"
@@ -95,10 +96,10 @@ class SignupViewController: FormViewController {
                 switch success {
                 case .success(let tokenResponse):
                     print("Sign up successful. Token: \(tokenResponse.token)")
-
                     
-                    //Nav
-                    
+                    let ProfileVC = ProfilePageViewController()
+                    ProfileVC.token = tokenResponse.token
+                    self.navigationController?.pushViewController(ProfileVC, animated: true)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -111,4 +112,5 @@ class SignupViewController: FormViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true, completion: nil)
     }
+   
 }
