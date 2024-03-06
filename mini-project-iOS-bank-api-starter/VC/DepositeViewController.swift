@@ -4,12 +4,13 @@
 //
 //  Created by Ahmad Musallam on 06/03/2024.
 //
-
 import UIKit
 import Eureka
 import Alamofire
 
 class DepositViewController: FormViewController {
+    var token: String?
+    //var deposit: AmountChange?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +46,26 @@ class DepositViewController: FormViewController {
     }
     @objc func submitTapped() {
         let depositRow: DecimalRow? = form.rowBy(tag: "deposit")
-        
+
+            // Check if deposit amount is available and create AmountChange object
+            if let depositAmount = depositRow?.value {
+              let deposits = AmountChange(amount: depositAmount)
+
+              // Call NetworkManager to deposit amount
+              NetworkManager.shared.deposit(token: token ?? "", amountChange: deposits) { result in
+                switch result {
+                case .success:
+                    
+                  print("Deposit successful")
+                case .failure(let error):
+                  print("Deposit failed: \(error.localizedDescription)")
+                }
+              }
+            } else {
+              // Handle the case where deposit amount is not available (e.g., show error message)
+              print("Deposit amount not available")
+            }
+
         
         let errors = form.validate()
         guard errors.isEmpty else {
@@ -53,8 +73,8 @@ class DepositViewController: FormViewController {
             presentAlertWithTitle(title: "Error", message: "Please type a valid number")
             return
         }
-        //?
-        let token = TokenResponse(token: "\(TokenResponse.init(token: ""))")
+        
+//        let token = TokenResponse(token: "\(TokenResponse.init(token: ""))")
         
         
     }
