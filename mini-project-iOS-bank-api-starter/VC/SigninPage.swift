@@ -11,7 +11,7 @@ class SignInViewController: FormViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+title = ("Sign in")
         setupForm()
     }
 
@@ -71,7 +71,7 @@ class SignInViewController: FormViewController {
                 switch success {
                 case .success(let tokenResponse):
                     print("Sign In successful. Token: \(tokenResponse.token)")
-                    
+                    //// jjjjjj
                     let ProfileVC = ProfilePageViewController()
                     ProfileVC.token = tokenResponse.token
                     self.navigationController?.pushViewController(ProfileVC, animated: true)

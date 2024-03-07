@@ -19,7 +19,7 @@ class SignupViewController: FormViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = ("Sign up")
         view.backgroundColor = .white
         setupForm()
     }

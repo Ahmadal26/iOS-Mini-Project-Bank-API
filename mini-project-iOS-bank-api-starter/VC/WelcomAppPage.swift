@@ -11,55 +11,56 @@ class WelcomeAppPageViewController: UIViewController {
     
     let logoImageView = UIImageView()
     let appNameLabel = UILabel()
-    let signInButton = UIButton()
-    let signUpButton = UIButton()
+    let signInButton = UIButton(type: .system)
+    let signUpButton = UIButton(type: .system)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
+        applyGradientBackground()
     }
 
     private func setupUI() {
         view.backgroundColor = .white
-        
-        
-        logoImageView.image = UIImage(named: "logoApp")
+
+        logoImageView.image = UIImage(named: "logo")
         logoImageView.contentMode = .scaleAspectFit
-        
-     
-        appNameLabel.text = " App Bank"
+
         appNameLabel.textAlignment = .center
         appNameLabel.font = UIFont.boldSystemFont(ofSize: 24)
-        
-        
-        signInButton.setTitle("Sign In", for: .normal)
-        signInButton.backgroundColor = UIColor.systemBlue
-        signInButton.layer.cornerRadius = 5
-        signInButton.addTarget(self, action: #selector(navigateToSignIn), for: .touchUpInside)
-        
-       
-        signUpButton.setTitle("Sign Up", for: .normal)
-        signUpButton.backgroundColor = UIColor.systemBlue
-        signUpButton.layer.cornerRadius = 5
-        signUpButton.addTarget(self, action: #selector(navigateToSignUp), for: .touchUpInside)
-        
-      
+
+        styleButton(signInButton, title: "Sign In")
+        styleButton(signUpButton, title: "Sign Up", backgroundColor: UIColor.lightGray)
+
         view.addSubview(logoImageView)
         view.addSubview(appNameLabel)
         view.addSubview(signInButton)
         view.addSubview(signUpButton)
-        
+
         setupLayout()
     }
 
+    private func styleButton(_ button: UIButton, title: String, backgroundColor: UIColor = UIColor.lightGray, textColor: UIColor = .black) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = backgroundColor
+        button.setTitleColor(textColor, for: .normal)
+        button.layer.cornerRadius = 10
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 0, height: 2)
+        button.layer.shadowRadius = 4
+        button.layer.shadowOpacity = 0.3
+        button.addTarget(self, action: title == "Sign In" ? #selector(navigateToSignIn) : #selector(navigateToSignUp), for: .touchUpInside)
+    }
+
+
     private func setupLayout() {
         logoImageView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(60)
-            make.centerX.equalTo(view)
-            make.height.equalTo(100)
-            make.width.equalTo(logoImageView.snp.height).multipliedBy(1.0)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            
+            make.centerX.equalToSuperview().offset(-13)
+            make.height.equalTo(290)
         }
+
         
         appNameLabel.snp.makeConstraints { make in
             make.top.equalTo(logoImageView.snp.bottom).offset(10)
@@ -79,14 +80,30 @@ class WelcomeAppPageViewController: UIViewController {
         }
     }
 
+    private func applyGradientBackground() {
+        let gradientLayer = CAGradientLayer()
+
+        // Create the custom color with RGB values (255, 252, 240)
+        let customColor = UIColor(red: 255/255, green: 252/255, blue: 240/255, alpha: 1.0)
+
+        // Use the custom color and systemPurple in the gradient
+        gradientLayer.colors = [customColor.cgColor, UIColor.systemMint.cgColor]
+
+        // Define the locations for the gradient stops
+        gradientLayer.locations = [0.0, 3.0]
+
+        // Set the frame of the gradient layer to match the bounds of the view
+        gradientLayer.frame = view.bounds
+
+        // Insert the gradient layer at the bottom of the view's layer stack
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+
     @objc private func navigateToSignIn() {
-      
         navigationController?.pushViewController(SignInViewController(), animated: true)
     }
 
     @objc private func navigateToSignUp() {
-        
         navigationController?.pushViewController(SignupViewController(), animated: true)
     }
 }
-

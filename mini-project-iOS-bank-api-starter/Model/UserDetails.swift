@@ -6,8 +6,8 @@
 //
 
 import Foundation
-struct UserDetails: Codable {
-    let name: String
+struct UserDetail: Decodable {
+    let username: String
     let email: String
-    let balance: String
-}
+    let balance: Double
+    let id: Int}
