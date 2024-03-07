@@ -28,6 +28,8 @@
 		E053ADE62B988311001E97E3 /* DepositeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E053ADE52B988311001E97E3 /* DepositeViewController.swift */; };
 		E053ADE82B988364001E97E3 /* WithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E053ADE72B988364001E97E3 /* WithdrawViewController.swift */; };
 		E053ADEA2B989FB4001E97E3 /* UserDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = E053ADE92B989FB4001E97E3 /* UserDetails.swift */; };
+		E053ADEC2B998F9D001E97E3 /* TransactionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E053ADEB2B998F9D001E97E3 /* TransactionTableViewController.swift */; };
+		E053ADF02B999822001E97E3 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E053ADEF2B999822001E97E3 /* Transaction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,8 @@
 		E053ADE52B988311001E97E3 /* DepositeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositeViewController.swift; sourceTree = "<group>"; };
 		E053ADE72B988364001E97E3 /* WithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawViewController.swift; sourceTree = "<group>"; };
 		E053ADE92B989FB4001E97E3 /* UserDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetails.swift; sourceTree = "<group>"; };
+		E053ADEB2B998F9D001E97E3 /* TransactionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewController.swift; sourceTree = "<group>"; };
+		E053ADEF2B999822001E97E3 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +134,7 @@
 				05CF04E02B97A23C00672FDF /* User.swift */,
 				05CF04DE2B97A22A00672FDF /* AmountChange.swift */,
 				E053ADE92B989FB4001E97E3 /* UserDetails.swift */,
+				E053ADEF2B999822001E97E3 /* Transaction.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -143,6 +148,7 @@
 				E053ADE32B9882A2001E97E3 /* ProfilePageViewController.swift */,
 				E053ADE52B988311001E97E3 /* DepositeViewController.swift */,
 				E053ADE72B988364001E97E3 /* WithdrawViewController.swift */,
+				E053ADEB2B998F9D001E97E3 /* TransactionTableViewController.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -231,6 +237,7 @@
 			files = (
 				05CF04C42B97A0AF00672FDF /* SignupPage.swift in Sources */,
 				E053ADE22B984DDE001E97E3 /* WelcomAppPage.swift in Sources */,
+				E053ADF02B999822001E97E3 /* Transaction.swift in Sources */,
 				05CF04D42B97A12600672FDF /* customView.swift in Sources */,
 				E053ADE62B988311001E97E3 /* DepositeViewController.swift in Sources */,
 				05CF04D82B97A15200672FDF /* NetworkManager.swift in Sources */,
@@ -243,6 +250,7 @@
 				E053ADEA2B989FB4001E97E3 /* UserDetails.swift in Sources */,
 				E053ADE02B9847B9001E97E3 /* SigninPage.swift in Sources */,
 				05CF04C22B97A0AF00672FDF /* SceneDelegate.swift in Sources */,
+				E053ADEC2B998F9D001E97E3 /* TransactionTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

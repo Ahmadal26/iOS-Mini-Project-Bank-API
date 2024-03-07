@@ -11,12 +11,12 @@ import UIKit
 import Eureka
 
 class WithdrawViewController: FormViewController {
-    
+    var token: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         // Do any additional setup after loading the view.
-        
+        title = ("Withdraw")
         setupForm()
     }
     
@@ -47,6 +47,22 @@ class WithdrawViewController: FormViewController {
     @objc func submitTapped() {
         let withdrawRow: DecimalRow? = form.rowBy(tag: "withdraw")
   
+        if let withdrawAmount = withdrawRow?.value {
+          let withdraws = AmountChange(amount: withdrawAmount)
+
+          NetworkManager.shared.withdraw(token: token ?? "", amountChange: withdraws) { result in
+            switch result {
+            case .success(let updatedBalance):
+                print("Withdraw successful. New balance: \(updatedBalance)")
+                          // Update your local balance variable or UI element here using updatedBalance
+            case .failure(let error):
+                print("Withdraw failed: \(error.localizedDescription)")
+            }
+          }
+        } else {
+          print("Withdraw amount not available")
+        }
+        
         let errors = form.validate()
         guard errors.isEmpty else {
             print(errors)

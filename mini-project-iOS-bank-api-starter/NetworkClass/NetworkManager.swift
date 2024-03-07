@@ -64,15 +64,33 @@ class NetworkManager {
         }
     }
     
-    func fetchUser(token: String,completion: @escaping (UserDetails?) -> Void) {
-        AF.request(baseUrl).responseDecodable(of: UserDetails.self) { response in
-            switch response.result {
-            case .success(let user):
-                completion(user)
-            case .failure(let error):
-                print(error)
-                completion(nil)
-            }
-        }
-    }
+    func fetchUser(token: String, completion: @escaping (Result<UserDetail, Error>) -> Void) {
+                   let url = baseUrl + "account"
+                   let headers: HTTPHeaders = [.authorization(bearerToken: token)]
+
+                   AF.request(url, headers: headers).responseDecodable(of: UserDetail.self) { response in
+                       switch response.result {
+                       case .success(let user):
+                           completion(.success(user))
+                       case .failure(let error):
+                           completion(.failure(error))
+                       }
+                   }
+               }
+    func fetchTransactions(token: String, completion: @escaping (Result<[Transaction], Error>) -> Void) {
+           let url = baseUrl + "transactions"
+           let headers: HTTPHeaders = [.authorization(bearerToken: token)]
+            AF.request(url, headers: headers).responseDecodable(of: [Transaction].self) { response in
+                switch response.result {
+                case .success(let transaction):
+                    completion(.success(transaction))
+                case .failure(let error):
+                    completion(.failure(error))
+                    if let data = response.data, let str = String(data: data, encoding: .utf8) {
+                                        print("Raw response: (str)")
+                    }
+                   }
+                }
+
+           }
 }

@@ -4,6 +4,7 @@
 //
 //  Created by Ahmad Musallam on 06/03/2024.
 //
+
 import UIKit
 import Eureka
 import Alamofire
@@ -16,7 +17,7 @@ class DepositViewController: FormViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         // Do any additional setup after loading the view.
-        
+        title = ("Deposite")
         setupForm()
     }
     
@@ -53,13 +54,14 @@ class DepositViewController: FormViewController {
 
               // Call NetworkManager to deposit amount
               NetworkManager.shared.deposit(token: token ?? "", amountChange: deposits) { result in
-                switch result {
-                case .success:
-                    
-                  print("Deposit successful")
-                case .failure(let error):
-                  print("Deposit failed: \(error.localizedDescription)")
-                }
+                  switch result {
+                    case .success(let updatedBalance):
+                        print("Deposit successful. New balance: \(updatedBalance)")
+                                  // Update your local balance variable or UI element here using updatedBalance
+                    case .failure(let error):
+                        print("Deposit failed: \(error.localizedDescription)")
+                    }
+                
               }
             } else {
               // Handle the case where deposit amount is not available (e.g., show error message)
@@ -73,10 +75,7 @@ class DepositViewController: FormViewController {
             presentAlertWithTitle(title: "Error", message: "Please type a valid number")
             return
         }
-        
-//        let token = TokenResponse(token: "\(TokenResponse.init(token: ""))")
-        
-        
+       
     }
     
     private func presentAlertWithTitle(title: String, message: String, completionHandler: (() -> Void)? = nil) {
